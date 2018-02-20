@@ -1,0 +1,103 @@
+<!doctype html><html><head><meta charset="utf-8"><title>React Webcam</title><style>body {
+      font-family: "Helvetica Neue", Helvetica, sans-serif;
+      font-weight: 200;
+      margin: 0 auto 50px;
+      width: 750px;
+    }
+    textarea {
+      font-family: monospace;
+      font-size: inherit;
+      height: 150px;
+      width: 100%;
+    }
+    pre {
+      white-space: pre-wrap;
+    }
+    .controls {
+      margin: 10px 0;
+    }
+    .webcams > video:nth-of-type(1) {
+      -webkit-filter: grayscale(1);
+      filter: grayscale(1);
+    }
+    .webcams > video:nth-of-type(2) {
+      -webkit-filter: sepia(1);
+      filter: sepia(1);
+    }
+    .webcams > video:nth-of-type(3) {
+      -webkit-filter: saturate(8);
+      filter: saturate(8);
+    }
+    .webcams > video:nth-of-type(4) {
+      -webkit-filter: hue-rotate(90deg);
+      filter: hue-rotate(90deg);
+    }
+    .webcams > video:nth-of-type(6) {
+      -webkit-filter: invert(1);
+      filter: invert(1);
+    }
+    .webcams > video:nth-of-type(7) {
+      -webkit-filter: brightness(3);
+      filter: brightness(3);
+    }
+    .webcams > video:nth-of-type(8) {
+      -webkit-filter: contrast(4);
+      filter: contrast(4);
+    }
+    .webcams > video:nth-of-type(9) {
+      -webkit-filter: blur(1px);
+      filter: blur(1px);
+    }</style></head><body><div id="root"></div><script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/preact/8.2.7/preact.js"></script><script crossorigin src="//unpkg.com/prop-types/prop-types.min.js"></script><script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/preact-compat/3.17.0/preact-compat.js"></script><script type="text/javascript">React = preactCompat;
+    ReactDOM = preactCompat;</script><script src="//npmcdn.com/babel-transform-in-browser@6.4.6/dist/btib.min.js"></script><script type="text/es2015">// getUserMedia only works for secure pages
+    if (!/https/.test(window.location.protocol)) window.location.protocol = 'https://';
+
+    const Webcam = window.Webcam.default;
+
+    const App = class App extends React.Component {
+      state={
+        screenshot: null,
+        tab: 0
+      }
+
+      render() {
+        return (
+          <div>
+            <h1>react-webcam</h1>
+            <Webcam
+              ref={ el => {this.webcam = el;} }
+              width='960' height='640'
+            />
+            <div>
+              <h2>CSS Filters</h2>
+              <div className='webcams'>
+                <Webcam width='212' height='160'/>
+                <Webcam width='212' height='160'/>
+                <Webcam width='212' height='160'/>
+                <Webcam width='212' height='160'/>
+                <Webcam width='212' height='160'/>
+                <Webcam width='212' height='160'/>
+                <Webcam width='212' height='160'/>
+                <Webcam width='212' height='160'/>
+                <Webcam width='212' height='160'/>
+              </div>
+            </div>
+            <div>
+              <h2>Screenshots</h2>
+              <div className='screenshots'>
+                <div className='controls'>
+                  <button onClick={this.screenshot}>capture</button>
+                </div>
+                { this.state.screenshot ? <img src={this.state.screenshot} /> : null }
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      screenshot = () => {
+        var screenshot = this.webcam.getScreenshot();
+        this.setState({screenshot: screenshot});
+      }
+    };
+
+    ReactDOM.render(<App/>, document.getElementById('root'));</script><script type="text/javascript" src="react-webcam.min.js"></script></body></html>
