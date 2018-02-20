@@ -217,8 +217,8 @@ export default class Webcam extends Component<CameraType, State> {
         }}
         ref={(el) => this.video = el}
         autoPlay
-        playsinline// necessary for iOS, see https://github.com/webrtc/samples/issues/929
-        srcObject={this.stream}
+        playsInline// necessary for iOS, see https://github.com/webrtc/samples/issues/929
+        srcobject={this.stream}
         muted={this.props.muted}
         className={this.props.className}
       />
