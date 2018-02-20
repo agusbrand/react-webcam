@@ -984,6 +984,7 @@ var Webcam = function (_Component) {
       this.stream = stream;
       var videoSettings = stream.getVideoTracks()[0].getSettings();
       debugConsole('video track settings', videoSettings);
+      this.video.srcObject = stream;
       this.setState({
         hasUserMedia: true,
         mirrored: videoSettings.facingMode === 'user'
@@ -1102,8 +1103,7 @@ var Webcam = function (_Component) {
         },
         autoPlay: true,
         playsInline: true // necessary for iOS, see https://github.com/webrtc/samples/issues/929
-        , srcobject: this.stream,
-        muted: this.props.muted,
+        , muted: this.props.muted,
         className: this.props.className
       });
     }
